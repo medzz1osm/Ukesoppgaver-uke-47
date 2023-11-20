@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<label for="month">Velg måned:</label>
+<select id="month">
+  <option value="Januar">Januar</option>
+  <option value="Februar">Februar</option>
+  <option value="Mars">Mars</option>
+  <option value="April">April</option>
+  <option value="Mai">Mai</option>
+  <option value="Juni">Juni</option>
+  <option value="Juli">Juli</option>
+  <option value="August">August</option>
+  <option value="September">September</option>
+  <option value="Oktober">Oktober</option>
+  <option value="November">November</option>
+  <option value="Desember">Desember</option>
+</select>
+<button onclick="getAverageTemperature()">Gjennomsnittstemperatur</button>
+
+<p>Gjennomsnittstemperatur for måned: <span id="temperature"></span></p>
+
+<script>
+  function getAverageTemperature() {
+    const month = document.getElementById('month').value;
+
+    fetch(`/getTemperature?month=${month}`)
+            .then(response => response.text())
+            .then(data => {
+              document.getElementById('temperature').innerText = data + ' °C';
+            })
+            .catch(error => console.error('Error:', error));
+  }
+</script>
+</body>
+</html>
